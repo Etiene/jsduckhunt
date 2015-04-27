@@ -1,9 +1,9 @@
 <center>
-	<canvas id="canvas" onmousedown="hit(event)"/>
+	<canvas id="canvas" onmousedown="hit(event)"></canvas>
 </center>
 
 <audio id="hitAudio">
-    <source src="mp3/hit.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/Etiene/jsduckhunt/master/mp3/hit.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -22,7 +22,7 @@
 
 	//Sprites
 	var sprites = new Image();
-	sprites.src = "images/sprites.png";
+	sprites.src = "https://raw.githubusercontent.com/Etiene/jsduckhunt/master/images/sprites.png";
 
 	var duckSprites = [
 		//x, y, width, height
@@ -36,7 +36,7 @@
 	    this.speed = speed; // movement in pixels per second
 		this.x = x;
 		this.y = y;
-		
+
 		this.sprite = duckSprites[0];
 		this.move = function(){
 			//move
@@ -84,7 +84,7 @@
 			ctx.drawImage(sprites,ducks[i].sprite[0],ducks[i].sprite[1],ducks[i].sprite[2],ducks[i].sprite[3],ducks[i].x,ducks[i].y,ducks[i].sprite[2]*scale,ducks[i].sprite[3]*scale);
 			ducks[i].move(); // move duck
 		}
-		
+
 		//Vegetation
 		ctx.drawImage(sprites,644,136,256,224,0,0,256*scale,224*scale);
 
@@ -98,7 +98,7 @@
 
 		//Spawn new ducks randomly
 		if(Math.random() < 0.005 && ducks.length < max_ducks){ // Will not explain about random seeds today
-			var y = canvas.height / 2 - Math.random() * canvas.height / 2; 
+			var y = canvas.height / 2 - Math.random() * canvas.height / 2;
 			ducks.push(new Duck(0,y,1));  //insert new duck in game
 		}
 
