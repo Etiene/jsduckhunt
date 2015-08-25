@@ -1,15 +1,22 @@
-<center>
-  <canvas id="canvas" onmousedown="hit(event)"></canvas>
-</center>
+<html> 
+  <body> 
+    <style>
+      canvas { 
+        cursor: crosshair; 
+      }
+    </style>
+  <center>
+      <canvas id="canvas" onmousedown="hit(event)"> </canvas>
+  </center>
 
-<audio id="hitAudio">
-    <source src="https://raw.githubusercontent.com/Etiene/jsduckhunt/master/mp3/hit.mp3" type="audio/mpeg">
-</audio>
+    <audio id="hitAudio">
+        <source src="https://raw.githubusercontent.com/Etiene/jsduckhunt/master/mp3/hit.mp3" type="audio/mpeg">
+    </audio>
 
-<script>
+  <script>
 
   //Game params
-  var scale = 2;
+  var scale = 1;
   var score = 0;
   var max_ducks = 4;
   var ducks = [];
@@ -17,12 +24,14 @@
   // Create the canvas
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
-  canvas.width = 256*scale; // size of vegetation image * scale
+    
+    // size of vegetation image * scale
+  canvas.width = 256*scale; 
   canvas.height = 224*scale;
 
   //Sprites
   var sprites = new Image();
-  sprites.src = "https://raw.githubusercontent.com/Etiene/jsduckhunt/master/images/sprites.png";
+  sprites.src = "http://etiene.net/sprites.png";
 
   var duckSprites = [
     //x, y, width, height
@@ -36,7 +45,7 @@
       this.speed = speed; // movement in pixels per second
     this.x = x;
     this.y = y;
-
+    
     this.sprite = duckSprites[0];
     this.move = function(){
       //move
@@ -61,14 +70,18 @@
   }
 
   function hit(event){
-    var x = event.clientX - canvas.offsetLeft; // Adjust x and y according to canvas position on screen
+      // Adjust x and y according to canvas position on screen
+    var x = event.clientX - canvas.offsetLeft; 
       var y = event.clientY - canvas.offsetTop;
-    for(i in ducks){ // check all ducks in game
+        // check all ducks in game
+    for(i in ducks){ 
+            // if click is over this duck
       if( x >= ducks[i].x &&  x <= ducks[i].x + ducks[i].sprite[2] * scale
-        && y >= ducks[i].y &&  y <= ducks[i].y + ducks[i].sprite[3] * scale){ // if click is over this duck
+        && y >= ducks[i].y &&  y <= ducks[i].y + ducks[i].sprite[3] * scale){ 
         score += 1000;
         document.getElementById('hitAudio').play();
-        ducks.splice(i,1); // Remove duck from the game
+                // Remove duck from the game
+        ducks.splice(i,1); 
       }
     }
   };
@@ -84,7 +97,7 @@
       ctx.drawImage(sprites,ducks[i].sprite[0],ducks[i].sprite[1],ducks[i].sprite[2],ducks[i].sprite[3],ducks[i].x,ducks[i].y,ducks[i].sprite[2]*scale,ducks[i].sprite[3]*scale);
       ducks[i].move(); // move duck
     }
-
+    
     //Vegetation
     ctx.drawImage(sprites,644,136,256,224,0,0,256*scale,224*scale);
 
@@ -97,8 +110,9 @@
   function main() {
 
     //Spawn new ducks randomly
-    if(Math.random() < 0.005 && ducks.length < max_ducks){ // Will not explain about random seeds today
-      var y = canvas.height / 2 - Math.random() * canvas.height / 2;
+    if(Math.random() < 0.005 && ducks.length < max_ducks){ 
+          // Will not explain about random seeds today
+      var y = canvas.height / 2 - Math.random() * canvas.height / 2; 
       ducks.push(new Duck(0,y,1));  //insert new duck in game
     }
 
@@ -108,4 +122,6 @@
   };
 
   main(); // start!
-</script>
+  </script>
+  </body>
+</html>
