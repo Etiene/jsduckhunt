@@ -1,5 +1,5 @@
 # jsduckhunt
-A duck hunt game made in javascript
+A duck hunt game made in javascript and resources to teach how to build it
 
 
 
